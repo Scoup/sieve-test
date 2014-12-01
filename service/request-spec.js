@@ -6,7 +6,7 @@ describe('request', function() {
     {
         data: "2013-04-30T09:25:43.510Z"
     }
-  ]
+  ];
 
   it('should convert string date to object date', inject(function(request) {
     var output = request.stringToDate(emails);
