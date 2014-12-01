@@ -3,7 +3,7 @@ angular.module('sieveTest', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate
 angular.module('sieveTest').config(function($stateProvider, $urlRouterProvider) {
 
     /* Add New States Above */
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/inbox');
 
 });
 
