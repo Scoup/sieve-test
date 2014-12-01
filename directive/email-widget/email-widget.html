@@ -1,0 +1,52 @@
+<div>
+    <form role="form-horizontal" role="form">
+        <div class="form-group">
+            <div class="col-sm-6">
+                <input class="form-control" id="inboxEmailWidget" placeholder="Buscar" ng-model="config.emailSearch">
+            </div>
+            <button class="btn btn-default col-sm-2" ng-click="config.emailSearch = ''">Limpar</button>
+            <div class="col-sm-2">
+                <label for="search">items por página:</label>
+                <select ng-model="config.pageSize" ng-options="n for n in [] | multipleRange:5:20:5">
+                </select>
+            </div>
+        </div>
+    </form>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <td>
+                    <a href="javascript:void(0)" ng-click="changeOrder('nome')">
+                        Nome <span ng-show="config.emailOrder == 'nome'" ng-class="config.reverse ? 'fa fa-sort-desc' : 'fa fa-sort-asc'"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:void(0)" ng-click="changeOrder('assunto')">
+                        Assunto <span ng-show="config.emailOrder == 'assunto'" ng-class="config.reverse ? 'fa fa-sort-desc' : 'fa fa-sort-asc'"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:void(0)" ng-click="changeOrder('data')">
+                        Quando <span ng-show="config.emailOrder == 'data'" ng-class="config.reverse ? 'fa fa-sort-desc' : 'fa fa-sort-asc'"></span>
+                    </a>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr dir-paginate="email in emails | filter:config.emailSearch | orderBy:config.emailOrder:config.reverse | itemsPerPage: config.pageSize" current-page="config.currentPage">
+                <td>{{email.nome}}</td>
+                <td>{{email.assunto}}</td>
+                <td>{{email.data | customDate}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <nav>
+        <dir-pagination-controls 
+            boundary-links="true" 
+            on-page-change="pageChangeHandler(newPageNumber)" 
+            template-url="directive/email-widget/email-widget-pagination.html">
+        </dir-pagination-controls>
+    </nav>
+</div>
